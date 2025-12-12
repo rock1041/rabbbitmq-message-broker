@@ -1,0 +1,14 @@
+1. To list queues running
+sudo rabbitmqctl list_queues
+
+2. To list exchanges available
+sudo rabbitmqctl list_exchanges
+
+3. To list existing bindings
+sudo rabbitmqctl list_bindings
+
+4. To start RabbitMQ server
+sudo systemctl start rabbitmq-server
+
+5. To check RabbitMQ server status
+sudo systemctl status rabbitmq-server
