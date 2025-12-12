@@ -25,7 +25,8 @@ object RealWorldPublisher {
       channel = connection.createChannel()
       channel.exchangeDeclare(EXCHANGE_NAME, "fanout")
       //channel.queueDeclare(QUEUE_NAME, false, false, false, null) // Declare queue
-      val message = args.mkString(" ")
+      //val message = args.mkString(" ")
+      val message = readFile(args(0))
       //channel.basicPublish("", QUEUE_NAME, null, message.getBytes(StandardCharsets.UTF_8))
       channel.basicPublish(EXCHANGE_NAME, "", null, message.getBytes("UTF-8"))
       println(s" [x] Sent '$message'")
@@ -38,4 +39,13 @@ object RealWorldPublisher {
       if (connection != null) connection.close()
     }
   }
+
+  def readFile(path: String): String = {
+
+    val source = scala.io.Source.fromFile(path)
+    val lines = try source.mkString finally source.close()
+
+    lines
+  }
+
 }
